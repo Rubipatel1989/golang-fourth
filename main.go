@@ -117,36 +117,43 @@ func login(c *gin.Context) {
 		Password string `json:"password"`
 	}
 
+	// 🔍 Validate input
 	if err := c.ShouldBindJSON(&input); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, errorResponse("Invalid request body: "+err.Error()))
 		return
 	}
 
+	// 🧠 Fetch user and password hash
 	var user User
 	var storedHash string
 	err := db.QueryRow("SELECT id, name, email, age, password FROM users WHERE email = ?", input.Email).
 		Scan(&user.ID, &user.Name, &user.Email, &user.Age, &storedHash)
-	if err != nil {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid email or password"})
+	if err == sql.ErrNoRows {
+		c.JSON(http.StatusUnauthorized, errorResponse("Invalid email or password"))
+		return
+	} else if err != nil {
+		c.JSON(http.StatusInternalServerError, errorResponse("Database error: "+err.Error()))
 		return
 	}
 
+	// 🔐 Check password
 	if !CheckPasswordHash(input.Password, storedHash) {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid email or password"})
+		c.JSON(http.StatusUnauthorized, errorResponse("Invalid email or password"))
 		return
 	}
 
+	// ✅ Generate JWT token
 	token, err := GenerateToken(user.Email)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Token generation failed"})
+		c.JSON(http.StatusInternalServerError, errorResponse("Token generation failed"))
 		return
 	}
 
+	// 🚀 Return success response
 	c.JSON(http.StatusOK, successResponse("Login successful", gin.H{
 		"token": token,
 		"user":  user,
 	}))
-
 }
 
 func getUsers(c *gin.Context) {
@@ -211,21 +218,48 @@ func createUser(c *gin.Context) {
 
 func updateUser(c *gin.Context) {
 	id := c.Param("id")
-	var u User
+
+	var u struct {
+		Name     string `json:"name"`
+		Email    string `json:"email"`
+		Age      int    `json:"age"`
+		Password string `json:"password"` // include password as optional
+	}
+
 	if err := c.ShouldBindJSON(&u); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, errorResponse("Invalid input: "+err.Error()))
 		return
 	}
 
-	_, err := db.Exec("UPDATE users SET name = ?, email = ?, age = ? WHERE id = ?", u.Name, u.Email, u.Age, id)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, errorResponse(err.Error()))
-		return
+	// Optional: hash new password if provided
+	if u.Password != "" {
+		hashedPassword, err := HashPassword(u.Password)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, errorResponse("Password hashing failed"))
+			return
+		}
+
+		_, err = db.Exec("UPDATE users SET name = ?, email = ?, age = ?, password = ? WHERE id = ?", u.Name, u.Email, u.Age, hashedPassword, id)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, errorResponse("Failed to update user: "+err.Error()))
+			return
+		}
+	} else {
+		// Update without password
+		_, err := db.Exec("UPDATE users SET name = ?, email = ?, age = ? WHERE id = ?", u.Name, u.Email, u.Age, id)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, errorResponse("Failed to update user: "+err.Error()))
+			return
+		}
 	}
 
-	u.ID, _ = strconv.Atoi(id)
-	c.JSON(http.StatusOK, successResponse("Users updated successfully", u))
-
+	userID, _ := strconv.Atoi(id)
+	c.JSON(http.StatusOK, successResponse("User updated successfully", gin.H{
+		"id":    userID,
+		"name":  u.Name,
+		"email": u.Email,
+		"age":   u.Age,
+	}))
 }
 
 func deleteUser(c *gin.Context) {
