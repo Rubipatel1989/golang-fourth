@@ -7,147 +7,161 @@
 	},
 	"item": [
 		{
-			"name": "addNewUser",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\":\"Manoj Kumar\",\n    \"email\":\"manoj90@gmail.com\",\n    \"age\":33\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": "http://localhost:8080/users"
-			},
-			"response": [
+			"name": "User",
+			"item": [
 				{
-					"name": "studenNew",
-					"originalRequest": {
+					"name": "signup",
+					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\":\"Pawan Kumar\",\n    \"email\":\"pawankum@gmail.com\",\n    \"age\":37\n}",
+							"raw": "{\n    \"name\":\"Manoj Kumar\",\n    \"email\":\"manoj90@gmail.com\",\n    \"age\":33,\n    \"password\":\"Bsa@123456\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "localhost:8080/api/students"
+						"url": "http://localhost:8080/signup"
 					},
-					"status": "Created",
-					"code": 201,
-					"_postman_previewlanguage": "JSON",
-					"header": [
+					"response": [
 						{
-							"key": "Content-Type",
-							"value": "application/json",
-							"type": "text"
-						},
-						{
-							"key": "Date",
-							"value": "Wed, 01 Jan 2025 09:41:29 GMT",
-							"type": "text"
-						},
-						{
-							"key": "Content-Length",
-							"value": "9",
-							"type": "text"
+							"name": "studenNew",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"Pawan Kumar\",\n    \"email\":\"pawankum@gmail.com\",\n    \"age\":37\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "localhost:8080/api/students"
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "JSON",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 01 Jan 2025 09:41:29 GMT",
+									"type": "text"
+								},
+								{
+									"key": "Content-Length",
+									"value": "9",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2\n}"
 						}
-					],
-					"cookie": [],
-					"body": "{\n    \"id\": 2\n}"
-				}
-			]
-		},
-		{
-			"name": "sinhgleUserFetch",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": "http://localhost:8080/users/2"
-			},
-			"response": [
+					]
+				},
 				{
-					"name": "singleFetch",
-					"originalRequest": {
-						"method": "GET",
+					"name": "login",
+					"request": {
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "",
+							"raw": "{\n    \"email\":\"manoj90@gmail.com\",\n    \"password\":\"Bsa@123456\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": {
-							"raw": "http://localhost:8080/users/2",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"users",
-								"2"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "1",
-									"disabled": true
-								}
-							]
-						}
+						"url": "http://localhost:8080/login"
 					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
+					"response": [
 						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Date",
-							"value": "Tue, 22 Apr 2025 12:25:28 GMT"
-						},
-						{
-							"key": "Content-Length",
-							"value": "69"
+							"name": "loginResponse",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\":\"manoj90@gmail.com\",\n    \"password\":\"Bsa@123456\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8080/login"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 23 Apr 2025 05:40:17 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "155"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbm9qOTBAZ21haWwuY29tIiwiZXhwIjoxNzQ1MzkwNDE3fQ.O0UXidb6GxmT89c92jMZfBZ5gRxziAat0whh6lJ3JW0\"\n}"
 						}
-					],
-					"cookie": [],
-					"body": "{\n    \"id\": 2,\n    \"name\": \"Pawan Kumar Kumar\",\n    \"email\": \"neha@gmail.com\",\n    \"age\": 33\n}"
-				}
-			]
-		},
-		{
-			"name": "userDelete",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\":\"Pawan Kumar\",\n    \"email\":\"pawankum@gmail.com\",\n    \"age\":37\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					]
 				},
-				"url": "localhost:8080/api/students/1"
-			},
-			"response": [
+				{
+					"name": "sinhgleUserFetch",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/users/2"
+					},
+					"response": [
+						{
+							"name": "sinhgleUserFetch",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:8080/users/2"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 23 Apr 2025 06:08:13 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "134"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"id\": 2,\n        \"name\": \"Pawan Kumar Kumar\",\n        \"email\": \"pawankum@gmail.com\",\n        \"age\": 33\n    },\n    \"message\": \"User fetched successfully\",\n    \"status\": true\n}"
+						}
+					]
+				},
 				{
 					"name": "userDelete",
-					"originalRequest": {
+					"request": {
 						"method": "DELETE",
 						"header": [],
 						"body": {
@@ -159,50 +173,50 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/users/1"
+						"url": "localhost:8080/users/1"
 					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
+					"response": [
 						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Date",
-							"value": "Tue, 22 Apr 2025 12:18:24 GMT"
-						},
-						{
-							"key": "Content-Length",
-							"value": "26"
+							"name": "userDelete",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"Pawan Kumar\",\n    \"email\":\"pawankum@gmail.com\",\n    \"age\":37\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8080/users/1"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 22 Apr 2025 12:18:24 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "26"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User deleted\"\n}"
 						}
-					],
-					"cookie": [],
-					"body": "{\n    \"message\": \"User deleted\"\n}"
-				}
-			]
-		},
-		{
-			"name": "userUpdate",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\":\"Pawan Kumar Kumar\",\n    \"email\":\"pawankum@gmail.com\",\n    \"age\":33\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					]
 				},
-				"url": "localhost:8080/api/students/2"
-			},
-			"response": [
 				{
 					"name": "userUpdate",
-					"originalRequest": {
+					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -214,53 +228,53 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/users/2"
+						"url": "localhost:8080/users/2"
 					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
+					"response": [
 						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Date",
-							"value": "Tue, 22 Apr 2025 12:19:29 GMT"
-						},
-						{
-							"key": "Content-Length",
-							"value": "73"
+							"name": "userUpdate",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"Pawan Kumar Kumar\",\n    \"email\":\"pawankum@gmail.com\",\n    \"age\":33\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8080/users/2"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 22 Apr 2025 12:19:29 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "73"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 2,\n    \"name\": \"Pawan Kumar Kumar\",\n    \"email\": \"pawankum@gmail.com\",\n    \"age\": 33\n}"
 						}
-					],
-					"cookie": [],
-					"body": "{\n    \"id\": 2,\n    \"name\": \"Pawan Kumar Kumar\",\n    \"email\": \"pawankum@gmail.com\",\n    \"age\": 33\n}"
-				}
-			]
-		},
-		{
-			"name": "userList",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"name\":\"Pawan Kumar\",\n    \"email\":\"pawankum@gmail.com\",\n    \"age\":37\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					]
 				},
-				"url": "localhost:8080/api/students"
-			},
-			"response": [
 				{
 					"name": "userList",
-					"originalRequest": {
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -272,29 +286,76 @@
 								}
 							}
 						},
-						"url": "http://localhost:8080/users"
+						"url": "localhost:8080/users"
 					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
+					"response": [
 						{
-							"key": "Content-Type",
-							"value": "application/json; charset=utf-8"
-						},
-						{
-							"key": "Date",
-							"value": "Tue, 22 Apr 2025 12:11:58 GMT"
-						},
-						{
-							"key": "Content-Length",
-							"value": "58"
+							"name": "userList",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"Pawan Kumar\",\n    \"email\":\"pawankum@gmail.com\",\n    \"age\":37\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "localhost:8080/users"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 23 Apr 2025 06:11:52 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "204"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 2,\n            \"name\": \"Pawan Kumar Kumar\",\n            \"email\": \"pawankum@gmail.com\",\n            \"age\": 33\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Manoj Kumar\",\n            \"email\": \"manoj90@gmail.com\",\n            \"age\": 33\n        }\n    ],\n    \"message\": \"Users fetched successfully\",\n    \"status\": true\n}"
 						}
-					],
-					"cookie": [],
-					"body": "[\n    {\n        \"id\": 1,\n        \"name\": \"Ramu\",\n        \"email\": \"ramu@gmail.com\",\n        \"age\": 21\n    }\n]"
+					]
 				}
 			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {
+			"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbm9qOTBAZ21haWwuY29tIiwiZXhwIjoxNzQ1MzkxNTQ3fQ.0QfdyA0GByZQTlZlgQdI150F2kT057V3a5yc-zH6duI"
+		}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }

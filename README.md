@@ -14,9 +14,12 @@
 ## check version 
        go version
 ## run file
-       go run hello.go
+       go run main.go
 # Execute listed commond
-go mod init golang-fourth
+       go mod init golang-fourth
+
 # Install Frmaework
-go get -u github.com/gin-gonic/gin
+       go get -u github.com/gin-gonic/gin
+       go get github.com/golang-jwt/jwt/v5
+
 
